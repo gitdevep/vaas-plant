@@ -1,0 +1,45 @@
+/*按钮button的通用样式*/
+.btn {
+    display: inline-block;
+    line-height: 15px;
+    white-space: nowrap;
+    cursor: pointer;
+    background: #fff;
+    border: 1px solid #dcdfe6;
+    -webkit-appearance: none;
+    text-align: center;
+    box-sizing: border-box;
+    outline: 0;
+    margin: 0;
+    -o-transition: .1s;
+    transition: .1s;
+    width: 80px;
+    height: 30px;
+    border-radius: 4px;
+}
+[name=primary]:active{
+    background-color: #409EFF;
+    border-color: #409EFF;
+}
+[name=primary]:hover{
+    background-color: #9fccfb;
+    border-color: #9fccfb;
+}
+[name=primary] { 
+    color: #fff;
+    background-color: #409EFF;
+    border-color: #409EFF;
+}
+[name=danger] {
+    color: #fff;
+    background-color: #f56c6c;
+    border-color: #f56c6c;
+}
+[name=danger]:active{
+    background-color: #f56c6c;
+    border-color: #f56c6c;
+}
+[name=danger]:hover{
+    background-color: #f18b8b;
+    border-color: #f18b8b;
+}

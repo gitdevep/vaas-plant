@@ -1,73 +1,21 @@
 <template>
-    <div class="table">
+    <div class="table" ref="mybox">
         <div class="crumbs">
             <el-breadcrumb separator="/">
                 <el-breadcrumb-item><i class="el-icon-tickets"></i> 基础表格</el-breadcrumb-item>
             </el-breadcrumb>
         </div>
-        <div class="container">
-            <div class="handle-box">
-                <el-button type="primary" icon="delete" class="handle-del mr10" @click="delAll">批量删除</el-button>
-                <el-select v-model="select_cate" placeholder="筛选省份" class="handle-select mr10">
-                    <el-option key="1" label="广东省" value="广东省"></el-option>
-                    <el-option key="2" label="湖南省" value="湖南省"></el-option>
-                </el-select>
-                <el-input v-model="select_word" placeholder="筛选关键词" class="handle-input mr10"></el-input>
-                <el-button type="primary" icon="search" @click="search">搜索</el-button>
-            </div>
-            <el-table :data="data" border style="width: 100%" ref="multipleTable" @selection-change="handleSelectionChange">
-                <el-table-column type="selection" width="55"></el-table-column>
-                <el-table-column prop="date" label="日期" sortable width="150">
-                </el-table-column>
-                <el-table-column prop="name" label="姓名" width="120">
-                </el-table-column>
-                <el-table-column prop="address" label="地址" :formatter="formatter">
-                </el-table-column>
-                <el-table-column label="操作" width="180">
-                    <template slot-scope="scope">
-                        <el-button size="small" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
-                        <el-button size="small" type="danger" @click="handleDelete(scope.$index, scope.row)">删除</el-button>
-                    </template>
-                </el-table-column>
-            </el-table>
-            <div class="pagination">
-                <el-pagination @current-change="handleCurrentChange" layout="prev, pager, next" :total="1000">
-                </el-pagination>
-            </div>
+        <div id="test_demo"><el-form ref="form" label-width="80px"><el-form-item label="多选框"><el-checkbox-group ><el-checkbox label="步步高" name="type"></el-checkbox><el-checkbox label="小天才" name="type"></el-checkbox><el-checkbox label="imoo" name="type"></el-checkbox></el-checkbox-group></el-form-item></el-form></div>
+        <div id="apptest">    
         </div>
-
-        <!-- 编辑弹出框 -->
-        <el-dialog title="编辑" :visible.sync="editVisible" width="30%">
-            <el-form ref="form" :model="form" label-width="50px">
-                <el-form-item label="日期">
-                    <el-date-picker type="date" placeholder="选择日期" v-model="form.date" value-format="yyyy-MM-dd" style="width: 100%;"></el-date-picker>
-                </el-form-item>
-                <el-form-item label="姓名">
-                    <el-input v-model="form.name"></el-input>
-                </el-form-item>
-                <el-form-item label="地址">
-                    <el-input v-model="form.address"></el-input>
-                </el-form-item>
-
-            </el-form>
-            <span slot="footer" class="dialog-footer">
-                <el-button @click="editVisible = false">取 消</el-button>
-                <el-button type="primary" @click="saveEdit">确 定</el-button>
-            </span>
-        </el-dialog>
-
-        <!-- 删除提示框 -->
-        <el-dialog title="提示" :visible.sync="delVisible" width="300px" center>
-            <div class="del-dialog-cnt">删除不可恢复，是否确定删除？</div>
-            <span slot="footer" class="dialog-footer">
-                <el-button @click="delVisible = false">取 消</el-button>
-                <el-button type="primary" @click="deleteRow">确 定</el-button>
-            </span>
-        </el-dialog>
+        <div id="app_test">    
+        </div>
     </div>
-</template>
+</template> 
 
 <script>
+    import baseform from '../page/BaseForm'
+    import $ from 'jquery'
     export default {
         name: 'basetable',
         data() {
@@ -87,7 +35,9 @@
                     date: '',
                     address: ''
                 },
-                idx: -1
+                idx: -1,
+                content:'',
+                value:[]
             }
         },
         created() {
@@ -124,15 +74,98 @@
             getData() {
                 // 开发环境使用 easy-mock 数据，正式环境使用 json 文件
                 if (process.env.NODE_ENV === 'development') {
-                    this.url = '/ms/table/list';
+                    //this.url = '/ms/table/list';
                 };
-                this.$axios.post(this.url, {
+                this.$http.get(this.url, {
                     page: this.cur_page
                 }).then((res) => {
-                    this.tableData = res.data.list;
+                    let value_data = res.data.list;
+                    this.content = $('<script id="test_test" type="text/template"><div class="container" id="wwwwTet"><div id="test_demo"><el-form ref="form" label-width="80px"><el-form-item label="多选框"><el-checkbox-group ><el-checkbox label="步步高" name="type"></el-checkbox><el-checkbox label="小天才" name="type"></el-checkbox><el-checkbox label="imoo" name="type"></el-checkbox></el-checkbox-group></el-form-item></el-form></div><button  v-on:click="select()">remove</button><table id="sert"><thead><tr><th>名字</th><th>出生日期</th><th>地址</th><th>操作</th></tr></thead><tbody><tr v-for ="(user,index) in value_data"><td>{{user.name}}</td><td>{{user.date}}</td><td>{{user.address}}</td><td><button v-on:click="deleteName(user.name,index)">remove</button></td></tr></tbody></table></div><\/script><script src="./static/js/jquery.min.js"><\/script><script src="./static/js/vue.min.js"><\/script>')
+                    $('#apptest').append(this.content);
+                    let ad = $('#test_test')[0].innerHTML;
+                    $('#app_test').append(ad)
+                    var myViewModel = new Vue({
+                        el: "#wwwwTet",
+                        data: {
+                            message:"12222",
+                            value_data:value_data
+                        },
+                        methods: {
+                            select:() => {
+                                console.log(1111)
+                            },
+                            deleteName:(name,index) => {
+                                console.log("name===",name,index)
+                            }
+                        }
+                    });
+                },(err) =>{
+                    this.content = $('<script id="test_test" type="text/template"><div class="container" id="wwwwTet"><div id="test_demo"><el-form ref="form" label-width="80px"><el-form-item label="多选框"><el-checkbox-group ><el-checkbox label="步步高" name="type"></el-checkbox><el-checkbox label="小天才" name="type"></el-checkbox><el-checkbox label="imoo" name="type"></el-checkbox></el-checkbox-group></el-form-item></el-form></div><button  v-on:click="select()">remove</button><table id="sert"><thead><tr><th>名字</th><th>出生日期</th><th>地址</th><th>操作</th></tr></thead><tbody><tr v-for ="(user,index) in value_data"><td>{{user.name}}</td><td>{{user.date}}</td><td>{{user.address}}</td><td><button v-on:click="deleteName(user.name,index)">remove</button></td></tr></tbody></table></div><\/script><script src="./static/js/jquery.min.js"><\/script><script src="./static/js/vue.min.js"><\/script>')
+                    $('#apptest').append(this.content);
+                    let ad = $('#test_test')[0].innerHTML;
+                    $('#app_test').append(ad)
+                    let value_data = [{
+                            "date": "1997-11-11",
+                            "name": "林丽",
+                            "address": "吉林省 辽源市 龙山区"
+                        }, {
+                            "date": "1987-09-24",
+                            "name": "文敏",
+                            "address": "江西省 萍乡市 芦溪县"
+                        }, {
+                            "date": "1996-08-08",
+                            "name": "杨秀兰",
+                            "address": "黑龙江省 黑河市 五大连池市"
+                        }, {
+                            "date": "1978-06-18",
+                            "name": "魏强",
+                            "address": "广东省 韶关市 始兴县"
+                        }, {
+                            "date": "1977-07-09",
+                            "name": "石秀兰",
+                            "address": "江苏省 宿迁市 宿豫区"
+                        }, {
+                            "date": "1994-09-20",
+                            "name": "朱洋",
+                            "address": "海外 海外 -"
+                        }, {
+                            "date": "1980-01-22",
+                            "name": "傅敏",
+                            "address": "海外 海外 -"
+                        }, {
+                            "date": "1985-10-10",
+                            "name": "毛明",
+                            "address": "内蒙古自治区 包头市 九原区"
+                        }, {
+                            "date": "1975-09-08",
+                            "name": "何静",
+                            "address": "西藏自治区 阿里地区 普兰县"
+                        }, {
+                            "date": "1970-06-07",
+                            "name": "郭秀英",
+                            "address": "四川省 巴中市 恩阳区"
+                        }]
+                    var myViewModel = new Vue({
+                        el: "#wwwwTet",
+                        data: {
+                            message:"12222",
+                            value_data:value_data
+                        },
+                        methods: {
+                            select:() => {
+                                console.log(1111)
+                            },
+                            deleteName:(name,index) => {
+                                console.log("name===",name,index)
+                            }
+                        }
+                    });
                 })
             },
             search() {
+                const self = this;
+                let a = self.$refs.mybox.innerHTML;
+                console.log('aaaa===', a);
                 this.is_search = true;
             },
             formatter(row, column) {
@@ -179,21 +212,21 @@
                 this.tableData.splice(this.idx, 1);
                 this.$message.success('删除成功');
                 this.delVisible = false;
+            },
+            remove(index){
+                console.log("qwwqwqeqweqwe",index)
             }
         }
     }
-
 </script>
 
-<style scoped>
+<style>
     .handle-box {
         margin-bottom: 20px;
     }
-
     .handle-select {
         width: 120px;
     }
-
     .handle-input {
         width: 300px;
         display: inline-block;
@@ -201,5 +234,20 @@
     .del-dialog-cnt{
         font-size: 16px;
         text-align: center
+    }
+    #sert {
+        width: 100%;
+        font-size:12px;
+        line-height:20px
+    }
+    #sert tr th {
+        border:solid 1px red;
+        text-align:center;
+        line-height: 40px
+    }
+    #sert tr td {
+        border:solid 1px red;
+        text-align:center;
+        line-height: 32px
     }
 </style>

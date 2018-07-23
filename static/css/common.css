@@ -1,0 +1,318 @@
+/*Header.vue的样式 start*/
+.header {
+    position: relative;
+    box-sizing: border-box;
+    width: 100%;
+    height: 70px;
+    font-size: 22px;
+    color: #fff;
+}
+.collapse-btn{
+    float: left;
+    padding: 0 21px;
+    cursor: pointer;
+    line-height: 70px;
+}
+.header .logo{
+    float: left;
+    width:250px;
+    line-height: 70px;
+}
+.header-right{
+    float: right;
+    padding-right: 50px;
+}
+.header-user-con{
+    display: flex;
+    height: 70px;
+    align-items: center;
+}
+.btn-fullscreen{
+    transform: rotate(45deg);
+    margin-right: 5px;
+    font-size: 24px;
+}
+.btn-bell, .btn-fullscreen{
+    position: relative;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    border-radius: 15px;
+    cursor: pointer;
+}
+.btn-bell-badge{
+    position: absolute;
+    right: 0;
+    top: -2px;
+    width: 8px;
+    height: 8px;
+    border-radius: 4px;
+    background: #f56c6c;
+    color: #fff;
+}
+.btn-bell .el-icon-bell{
+    color: #fff;
+}
+.user-name{
+    margin-left: 10px;
+}
+.user-avator{
+    margin-left: 20px;
+}
+.user-avator img{
+    display: block;
+    width:40px;
+    height:40px;
+    border-radius: 50%;
+}
+.el-dropdown-link{
+    color: #fff;
+    cursor: pointer;
+}
+.el-dropdown-menu__item{
+    text-align: center;
+}
+.user-login-out{
+    margin-left: 20px;
+    font-size: 16px;
+    cursor: pointer;
+    line-height: 16px;
+}
+.user-avator{
+    display: flex;
+}
+.user-avator .user-info{
+    line-height: 40px;
+    margin-left: 10px;
+}
+/*Header.vue的样式 end*/
+/*Footer.vue的样式 start*/
+.footer{
+    height: 50px;
+    line-height: 50px;
+    color: #eceff6;
+    text-align: center;
+    font-size: 14px;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    background: #242f42;
+    border-top: 2px solid #3064d7;
+    -webkit-box-shadow: 0 5px 20px rgba(48,100,215,.6) inset;
+    box-shadow: inset 0 5px 20px rgba(48,100,215,.6);
+}
+/*Footer.vue的样式 end*/
+/*Sidebar.vue的样式 start*/
+.sidebar{
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 70px;
+    bottom:0;
+    overflow-y: scroll;
+}
+.sidebar::-webkit-scrollbar{
+    width: 0;
+}
+.sidebar-el-menu:not(.el-menu--collapse){
+    width: 250px;
+}
+.sidebar > ul {
+    height:100%;
+}
+/*Sidebar.vue的样式 end*/
+/*Tags.vue的样式 start*/
+.tags {
+    position: relative;
+    height: 30px;
+    overflow: hidden;
+    background: #fff;
+    padding-right: 120px;
+}
+
+.tags ul {
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+}
+
+.tags-li {
+    float: left;
+    margin: 3px 5px 2px 3px;
+    border-radius: 3px;
+    font-size: 12px;
+    overflow: hidden;
+    cursor: pointer;
+    height: 23px;
+    line-height: 23px;
+    border: 1px solid #e9eaec;
+    background: #fff;
+    padding: 0 5px 0 12px;
+    vertical-align: middle;
+    color: #666;
+    -webkit-transition: all .3s ease-in;
+    -moz-transition: all .3s ease-in;
+    transition: all .3s ease-in;
+}
+
+.tags-li:not(.active):hover {
+    background: #f8f8f8;
+}
+
+.tags-li.active {
+    color: #fff;
+}
+
+.tags-li-title {
+    float: left;
+    max-width: 80px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    margin-right: 5px;
+    color: #666;
+}
+
+.tags-li.active .tags-li-title {
+    color: #fff;
+}
+
+.tags-close-box {
+    position: absolute;
+    right: 0;
+    top: 0;
+    box-sizing: border-box;
+    padding-top: 1px;
+    text-align: center;
+    width: 110px;
+    height: 30px;
+    background: #fff;
+    box-shadow: -3px 0 15px 3px rgba(0, 0, 0, .1);
+    z-index: 10;
+}
+/*Tags.vue的样式 end*/
+
+.content-common{
+    width: 100%;
+    height: 100%;
+    line-height: 60px;
+}
+/*表格、输入框、选择框、label的通用样式 start*/
+table,table tr th,table tr td {
+  border: 1px solid #ebeef5;
+  font-size: 14px;
+  padding-left: 10px;
+  padding-right: 10px;
+  box-sizing: border-box;
+  white-space: normal;
+  word-break: break-all;
+  text-overflow: ellipsis;
+}
+table tr td:first-of-type { 
+    text-align:center; 
+}
+tbody tr:hover {
+  background-color: #d3d3d3;
+}
+table tr th {
+  text-align: center;
+  font-size: 16px;
+  color: #606266;
+  font-weight: normal;
+}
+table {
+  width: 100%;
+  line-height: 48px;
+  text-align: left;
+  border-collapse: collapse;
+  color: #606266;
+}
+form table {
+    width: 800px;
+    margin-left: 80px;
+    line-height: 32px;
+}
+label {
+    text-align: right;
+    font-size: 14px;
+    color: #606266;
+    line-height: 40px;
+    padding: 0 12px 0 0;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    line-height: 32px;
+    display: inline-block;
+    width: 80px;
+}
+input[type=text] {
+    -webkit-appearance: none;
+    background-color: #fff;
+    background-image: none;
+    border-radius: 4px;
+    border: 1px solid #dcdfe6;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    color: #606266;
+    display: inline-block;
+    font-size: inherit;
+    height: 32px;
+    line-height: 32px;
+    outline: 0;
+    padding: 0 15px;
+    -webkit-transition: border-color .2s cubic-bezier(.645,.045,.355,1);
+    -o-transition: border-color .2s cubic-bezier(.645,.045,.355,1);
+    transition: border-color .2s cubic-bezier(.645,.045,.355,1);
+    min-width: 400px;
+}
+input[type=text]:focus{
+    border: 1px solid #409EFF;
+}
+
+select {
+    background-color: #fff;
+    background-image: none;
+    border-radius: 4px;
+    border: 1px solid #dcdfe6;
+    color: #606266;
+    display: inline-block;
+    font-size: 14px;
+    height: 32px;
+    line-height: 32px;
+    min-width: 240px;
+}
+label[for=uploadFile] {
+    position: absolute;
+    border: 1px solid dcdfe6;
+    height: 32px;
+    line-height: 32px;
+    width: 120px;
+    text-align: center;
+    border-radius: 4px;
+    top: 155px;
+    cursor: pointer;
+    background: #409EFF;
+    color: #fff;
+}
+input[type='checkbox']{
+    width: 18px;
+    height: 18px;
+    background-color: #fff;
+    -webkit-appearance:none;
+    border: 1px solid #c9c9c9;
+    border-radius: 2px;
+    outline: none;
+}
+input[type=checkbox]:checked{
+    background: url("../img/checkbox_icon.png") no-repeat center;
+ }
+/*表格、输入框、选择框、label的通用样式 end*/
+#uploadFile {
+    display: none;
+}
+.mg-left-20{
+    margin-left: 20px;
+}
+.mg-left-30{
+    margin-left: 30px;
+}

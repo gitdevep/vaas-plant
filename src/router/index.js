@@ -20,9 +20,19 @@ export default new Router({
                     meta: { title: '系统首页' }
                 },
                 {
+                    path: '/filemanage',
+                    component: resolve => require(['../components/page/FileManage.vue'], resolve),
+                    meta: { title: '文件管理' }
+                },
+                {
                     path: '/table',
                     component: resolve => require(['../components/page/BaseTable.vue'], resolve),
                     meta: { title: '基础表格' }
+                },
+                {
+                    path: '/eltable',
+                    component: resolve => require(['../components/page/ElTable.vue'], resolve),
+                    meta: { title: '表格' }
                 },
                 {
                     path: '/tabs',
@@ -69,6 +79,11 @@ export default new Router({
                     path: '/permission',
                     component: resolve => require(['../components/page/Permission.vue'], resolve),
                     meta: { title: '权限测试', permission: true }
+                },
+                {
+                    path:'/fileupload',
+                    component: resolve => require(['../components/page/FileUpload.vue'], resolve),
+                    meta: {title: '文件上传'}
                 }
             ]
         },

@@ -1,7 +1,7 @@
 {
-  "name": "vue-manage-system",
+  "name": "cloud-plant",
   "version": "3.1.0",
-  "description": "基于Vue.js 2.x系列 + element-ui 内容管理系统解决方案",
+  "description": "深圳互连-江苏环实",
   "author": "lin-xin <2981207131@qq.com>",
   "private": true,
   "scripts": {
@@ -13,7 +13,10 @@
     "axios": "^0.15.3",
     "babel-polyfill": "^6.23.0",
     "element-ui": "2.3.3",
+    "jquery": "^3.3.1",
     "mavon-editor": "^2.5.4",
+    "sass-loader": "^7.0.3",
+    "style-loader": "^0.21.0",
     "vue": "^2.5.16",
     "vue-cropperjs": "^2.2.0",
     "vue-quill-editor": "3.0.6",
@@ -22,6 +25,7 @@
     "vuedraggable": "^2.16.0"
   },
   "devDependencies": {
+    "ajv": "^6.5.2",
     "autoprefixer": "^7.1.2",
     "babel-core": "^6.22.1",
     "babel-helper-vue-jsx-merge-props": "^2.0.3",
@@ -33,7 +37,7 @@
     "babel-preset-stage-2": "^6.22.0",
     "chalk": "^2.0.1",
     "copy-webpack-plugin": "^4.0.1",
-    "css-loader": "^0.28.0",
+    "css-loader": "^0.28.11",
     "extract-text-webpack-plugin": "^3.0.0",
     "file-loader": "^1.1.4",
     "friendly-errors-webpack-plugin": "^1.6.1",

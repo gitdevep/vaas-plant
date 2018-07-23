@@ -7,8 +7,13 @@ import 'element-ui/lib/theme-chalk/index.css';    // 默认主题
 // import '../static/css/theme-green/index.css';       // 浅绿色主题
 import "babel-polyfill";
 
+import '../static/css/common.css';  //引入头部、底部、左侧和tags的样式
+// 引入各个控件的通用样式
+import '../static/css/button-common.css';
+import '../static/css/modal.css';
+
 Vue.use(ElementUI, { size: 'small' });
-Vue.prototype.$axios = axios;
+Vue.prototype.$http = axios;
 
 //使用钩子函数对路由进行权限跳转
 router.beforeEach((to, from, next) => {

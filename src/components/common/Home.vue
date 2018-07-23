@@ -12,6 +12,7 @@
                 </transition>
             </div>
         </div>
+        <v-foot></v-foot>
     </div>
 </template>
 
@@ -19,6 +20,7 @@
     import vHead from './Header.vue';
     import vSidebar from './Sidebar.vue';
     import vTags from './Tags.vue';
+    import vFoot from './Footer.vue';
     import bus from './bus';
     export default {
         data(){
@@ -28,7 +30,7 @@
             }
         },
         components:{
-            vHead, vSidebar, vTags
+            vHead, vSidebar, vTags, vFoot
         },
         created(){
             bus.$on('collapse', msg => {
