@@ -1,50 +1,24 @@
 <template>
     <div>
-        <div class="crumbs">
-            <div><i class="el-icon-tickets"></i> 文件管理 | 文件上传</div>
-        </div>
         <div class="container">
-            <form>
-                <div class="content-common">
-                    <div>
-                        <label>{{fileFormData.select_file}}</label>
-                        <label for="uploadFile">{{fileFormData.select_file}}</label>
-                        <input type="file" id="uploadFile" multiple="multiple"  @change='onUpload'>
-                    </div>
-                    <div v-if="fileData.length>0">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>{{fileFormData.table.file_name}}</th>
-                                    <th>{{fileFormData.table.process}}</th>
-                                    <th>{{fileFormData.table.operation}}</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr v-for ='(value, index) in fileData' :key="index">
-                                    <td>{{value.name}}</td>
-                                    <td></td>
-                                    <td><input type="button" name="danger"  class="btn" :value="fileFormData.table.deleteFile" @click="deleteFile(index)"></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div>
-                        <label>{{fileFormData.origin_name}}</label>
-                        <select v-model="originValue">
-                            <option v-for="(value, index) in originate" :key="index" :value="value.id">{{value.name}}</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label>{{fileFormData.file_name}}</label>
-                        <input type="text" id="name" v-model="name"  value=''>
-                    </div>
-                    <div class="mg-left-30">
-                        <input type="button" name="primary" class="btn" :value="fileFormData.btn_save" @click="save">
-                        <input type="button" name="danger"  class="btn" :value="fileFormData.btn_cancle" @click="cancle">
-                    </div>
+            <div class="vas-picture-item">
+                <div style="display:flex">
+                  <div class="vas-picture-list">
+                    <img v-bind:src="imgUrl" style="padding:20px; width:160px; height:160px">
+                  </div>
+                  <div class="vas-picture-list">
+                    <img v-bind:src="imgUrl" style="padding:20px; width:160px; height:160px">
+                  </div>
                 </div>
-            </form>
+            </div>
+
+            <div class="vas-history-item">
+                <div v-bind:style="{'margin-top': '20px', 'text-align': 'center'}">
+                    <input type="button" name="primary" class="btn" :id="btn[0].id" :title="btn[0].title" :value="btn[0].value">
+                    <input type="button" name="danger"  class="btn" :id="btn[1].id" :title="btn[1].title" :value="btn[1].value" @click="btn[1].delAll">
+                    <input type="button" name="primary" class="btn" :id="btn[2].id" :title="btn[2].title" :value="btn[2].value">
+                </div>
+            </div>
         </div>
     </div>
 </template>
@@ -54,6 +28,7 @@ export default {
   name: "fileUpload",
   data() {
     return {
+      imgUrl:"static/img/test11.jpg",
       fileData: [], // 上传文件时的数据
       originate: [{
           "id":"123",
@@ -78,7 +53,33 @@ export default {
             operation: "操作",
             deleteFile: "删除"
         }
-      }
+      },
+        btn:[{
+             id:"btn0",
+             title:"文件上传",
+             value:"文件上传"
+           },
+           {
+             id:"btn1",
+             title:"删除",
+             value:"删除",
+             delAll:()=> {
+                const length = this.multipleSelection.length;
+                let str = "";
+                this.del_list = this.del_list.concat(this.multipleSelection);
+                for (let i = 0; i < length; i++) {
+                  str += this.multipleSelection[i].name + " ";
+                }
+                this.$message.error("删除了" + str);
+                this.multipleSelection = [];
+              },
+           },
+           {
+             id:"btn2",
+             title:"分享",
+             value:"分享"
+           }
+        ]      
     };
   },
   created() {},

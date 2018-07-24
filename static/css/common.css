@@ -6,6 +6,9 @@
     height: 70px;
     font-size: 22px;
     color: #fff;
+    border-bottom: 1px solid #3064d7;
+    -webkit-box-shadow: 0 5px 20px rgba(48,100,215,.6) inset;
+    box-shadow: inset 0 5px 20px rgba(48,100,215,.6);
 }
 .collapse-btn{
     float: left;
@@ -85,6 +88,18 @@
     line-height: 40px;
     margin-left: 10px;
 }
+.el-menu-item {
+    border-bottom: 2px solid #3064d7;
+    -webkit-box-shadow: 0 5px 20px rgba(48,100,215,.6) inset;
+    box-shadow: inset 0 5px 20px rgba(48,100,215,.6);
+}
+.el-menu-item:hover{
+    background:none;
+    opacity: 0.5;
+}
+.el-menu-item:active{
+    background:none;
+}
 /*Header.vue的样式 end*/
 /*Footer.vue的样式 start*/
 .footer{
@@ -111,16 +126,22 @@
     top: 70px;
     bottom:0;
     overflow-y: scroll;
+    color: #fff;
+    border-bottom: 2px solid #3064d7;
 }
 .sidebar::-webkit-scrollbar{
     width: 0;
 }
 .sidebar-el-menu:not(.el-menu--collapse){
-    width: 250px;
+    width: 150px;
 }
 .sidebar > ul {
     height:100%;
 }
+.sidebar-el-menu {
+    background: url("") repeat-x bottom;
+}
+
 /*Sidebar.vue的样式 end*/
 /*Tags.vue的样式 start*/
 .tags {
@@ -315,4 +336,33 @@ input[type=checkbox]:checked{
 }
 .mg-left-30{
     margin-left: 30px;
+}
+
+.vas-history-item {
+    width: 30%;
+    background: url("../img/border.png") no-repeat 50%;
+    background-size: 100% 100%;
+    margin-right: 20px;
+    position: relative;
+}
+.vas-picture-item {
+    width: 70%;
+    background: url("../img/border.png") no-repeat 50%;
+    background-size: 100% 100%;
+    text-align: center;
+    height: 100%;
+}
+.vas-picture-list {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    margin-left: 20px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    background: url("../img/border.png") no-repeat 50%;
+    background-size: 100% 100%;
+    text-align: center;
+}
+.wrapper {
+    background: url("../img/common-bg.jpg") no-repeat 50%;
 }

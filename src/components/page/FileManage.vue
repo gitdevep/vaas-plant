@@ -1,41 +1,24 @@
 <template>
     <div>
-        <div class="crumbs">
-            <div><i class="el-icon-tickets"></i> 文件列表</div>
-        </div>
         <div class="container">
-            <div class="handle-box">
-                <input type="button" name="primary" class="btn" :id="btn[0].id" :title="btn[0].title" :value="btn[0].value" @click="upload">
-                <input type="button" name="danger"  class="btn" :id="btn[1].id" :title="btn[1].title" :value="btn[1].value" @click="btn[1].delAll">
-                <input type="button" name="primary" class="btn" :id="btn[2].id" :title="btn[2].title" :value="btn[2].value" @click="tag">
-                <input type="button" name="primary" class="btn" :id="btn[3].id" :title="btn[3].title" :value="btn[3].value" @click="share">
+            <div class="vas-picture-item">
+                <div>
+                  <div>
+                    <img v-bind:src="imgUrl" style="padding:20px;max-width:100%;width:900px;min-width:'200px'">
+                  </div>
+                </div>
             </div>
 
-            <div>
-                <table>
-                    <thead>
-                        <tr>
-                            <th><input type="checkbox" v-model="allSelect"></th>
-                            <th>名称</th>
-                            <th>时间</th>
-                            <th>上传人</th>
-                            <th>操作</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr v-for ='(value, index) in data' :key="index">
-                            <td><input type="checkbox" v-model="checkedList[index]" @change="selectFile(index)"></td>
-                            <td>{{value.name}}</td>
-                            <td>{{value.date}}</td>
-                            <td>{{value.address}}</td>
-                            <td></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="pagination">
-                <el-pagination @current-change="handleCurrentChange" layout="prev, pager, next" :total="1000">
-                </el-pagination>
+            <div class="vas-history-item">
+                <div v-bind:style="{'margin-top': '20px', 'text-align': 'center'}">
+                    <input type="button" name="primary" class="btn" :id="btn[0].id" :title="btn[0].title" :value="btn[0].value" @click="upload">
+                    <input type="button" name="danger"  class="btn" :id="btn[1].id" :title="btn[1].title" :value="btn[1].value" @click="btn[1].delAll">
+                    <input type="button" name="primary" class="btn" :id="btn[2].id" :title="btn[2].title" :value="btn[2].value" @click="share">
+                </div>
+                <div v-bind:style="{'position': 'absolute', 'bottom':'40px', 'right':'40px','color':'#fff'}">
+                  <a @click="previous" v-bind:style="{'cursor': 'pointer', 'display':'inline-block'}">上一张</a>
+                  <a @click="next" v-bind:style="{'cursor': 'pointer', 'display':'inline-block', 'margin-left':'20px'}">下一张</a>
+                </div>
             </div>
         </div>
         <div>
@@ -50,18 +33,8 @@
     name: "fileManage",
     data() {
       return {
+        imgUrl:"static/img/test11.jpg",
         url: "./static/vuetable.json",
-        tableData: [],
-        cur_page: 1,
-        multipleSelection: [],
-        select_cate: "",
-        select_word: "",
-        del_list: [],
-        allSelect: [],
-        checkedList: [],
-        is_search: false,
-        editVisible: false,
-        delVisible: false,
         title: '分享',
         btn:[{
              id:"btn0",
@@ -70,8 +43,8 @@
            },
            {
              id:"btn1",
-             title:"批量删除",
-             value:"批量删除",
+             title:"删除",
+             value:"删除",
              delAll:()=> {
                 const length = this.multipleSelection.length;
                 let str = "";
@@ -85,11 +58,6 @@
            },
            {
              id:"btn2",
-             title:"标签",
-             value:"标签"
-           },
-           {
-             id:"btn3",
              title:"分享",
              value:"分享"
            }
@@ -123,85 +91,19 @@
       vmodal
     },
     created() {
-      this.getData();
+      
     },
     computed: {
-      data() {
-        return this.tableData.filter(d => {
-          let is_del = false;
-          for (let i = 0; i < this.del_list.length; i++) {
-            if (d.name === this.del_list[i].name) {
-              is_del = true;
-              break;
-            }
-          }
-          if (!is_del) {
-            if (
-              d.address.indexOf(this.select_cate) > -1 &&
-              (d.name.indexOf(this.select_word) > -1 ||
-                d.address.indexOf(this.select_word) > -1)
-            ) {
-              return d;
-            }
-          }
-        });
-      }
     },
     methods: {
-      // 分页导航
-      handleCurrentChange(val) {
-        this.cur_page = val;
-        this.getData();
+      previous() {
+
       },
-      // 获取 easy-mock 的模拟数据
-      getData() {
-        // 开发环境使用 easy-mock 数据，正式环境使用 json 文件
-        if (process.env.NODE_ENV === "development") {
-          this.url = "/ms/table/list";
-        }
-        this.$http
-          .post(this.url, {
-            page: this.cur_page
-          })
-          .then(res => {
-            this.tableData = res.data.list;
-          });
-      },
-      search() {
-        this.is_search = true;
-      },
-      formatter(row, column) {
-        return row.address;
-      },
-      filterTag(value, row) {
-        return row.tag === value;
-      },
-      handleEdit(index, row) {
-        this.idx = index;
-        const item = this.tableData[index];
-        this.form = {
-          name: item.name,
-          date: item.date,
-          address: item.address
-        };
-        this.editVisible = true;
-      },
-      handleDelete(index, row) {
-        this.idx = index;
-        this.delVisible = true;
-      },
-      handleSelectionChange(val) {
-        this.multipleSelection = val;
-      },
-      // 保存编辑
-      saveEdit() {
-        this.$set(this.tableData, this.idx, this.form);
-        this.editVisible = false;
-        this.$message.success(`修改第 ${this.idx + 1} 行成功`);
+      next() {
+
       },
       // 确定删除
       deleteRow() {
-        this.tableData.splice(this.idx, 1);
         this.$message.success("删除成功");
         this.delVisible = false;
       },

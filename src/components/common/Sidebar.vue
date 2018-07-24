@@ -31,11 +31,6 @@ export default {
       collapse: false,
       items: [
         {
-          icon: "el-icon-setting",
-          index: "dashboard",
-          title: "系统首页"
-        },
-        {
           icon: "el-icon-document",
           index: "filemanage",
           title: "文件管理"
