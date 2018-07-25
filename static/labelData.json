@@ -1,0 +1,45 @@
+{
+    "success": true,
+    "code": 1,
+    "msg": null,
+    "data": [
+        {
+          "parentId": "0",
+          "id": 123,
+          "name": "算法",
+          "nameEn": "suanfa",
+          "fileAttr": "1",
+          "isNeed": "1",
+          "dicCode": "11",
+          "value": [
+                {
+              "id": "111qq",
+              "name": "2345"
+                },
+                {
+              "id": "112www",
+              "name": "23456777"
+                }
+            ]
+        },
+        {
+          "parentId": "0",
+          "id": 124,
+          "name": "行业",
+          "nameEn": "hangye",
+          "fileAttr": "1",
+          "isNeed": "1",
+          "dicCode": "12",
+          "value": [
+                {
+              "id": "111",
+              "name": "2345rererre"
+                },
+                {
+              "id": "112",
+              "name": "23456777werewrew"
+                }
+            ]
+        }
+    ]
+}

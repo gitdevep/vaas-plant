@@ -34,69 +34,6 @@ export default {
           icon: "el-icon-document",
           index: "filemanage",
           title: "文件管理"
-        },
-        {
-          icon: "el-icon-date",
-          index: "3",
-          title: "组件管理",
-          subs: [
-            {
-              icon: "el-icon-tickets",
-              index: "table",
-              title: "基本表格"
-            },
-            {
-              icon: "el-icon-tickets",
-              index: "eltable",
-              title: "表格"
-            },
-            {
-              icon: "el-icon-message",
-              index: "tabs",
-              title: "tab选项卡"
-            },
-            {
-              index: "form",
-              title: "基本表单"
-            },
-            {
-              index: "editor",
-              title: "富文本编辑器"
-            },
-            {
-              index: "markdown",
-              title: "markdown编辑器"
-            },
-            {
-              index: "upload",
-              title: "文件上传"
-            },
-            {
-              icon: "el-icon-star-on",
-              index: "charts",
-              title: "schart图表"
-            },
-            {
-              icon: "el-icon-rank",
-              index: "drag",
-              title: "拖拽列表"
-            },
-            {
-              icon: "el-icon-warning",
-              index: "permission",
-              title: "权限测试"
-            },
-            {
-              icon: "el-icon-warning",
-              index: "form_input",
-              title: "测试表单"
-            },
-            {
-              icon: "el-icon-error",
-              index: "404",
-              title: "404页面"
-            }
-          ]
         }
       ]
     };
