@@ -22,16 +22,15 @@ export default {
   data() {
     return {
       fileFormData: {
-        selectId:'1',
+        selectId: "1",
         select_file: "上传文件",
         fileTypeName: "属性",
-        fileType: [{
-            id: '1',
-            name: '图片'
-        },{
-            id: '2',
-            name: '文件'
-        }]
+        fileType: [
+          {
+            id: "1",
+            name: "图片"
+          }
+        ]
       }
     };
   },
@@ -40,10 +39,17 @@ export default {
   methods: {
     // 选择文件
     onUpload(e) {
-      let fileName = e.target.files[0].name;
+      let files = e.target.files;
       let formData = new FormData();
-      formData.append("file", e.target.files[0]);
-      formData.append("fileName", e.target.files[0].name);
+      for (var i = 0; i < files.length; i++) {
+        let fileName = files[i].name;
+        var exec = /[.]/.exec(fileName) ? /[^.]+$/.exec(fileName.toLowerCase()) : [];
+        if (exec[0] !== "jpg" && exec[0] !== "png") {
+          this.$message.showTips("error", "文件格式不对，请上传jpg、png格式文件!");
+          return false;
+        }
+        formData.append("file[]", files[i]);
+      }
       let config = {
         headers: {
           "Content-Type": "multipart/form-data" // 以表单传数据的格式来传递fromdata

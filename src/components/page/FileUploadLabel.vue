@@ -11,7 +11,7 @@
                             <option v-for="(value, i) in value.value" :key="i" :value="value">{{value.name}}</option>
                         </select>
                     </div>
-                <div class="btn-center">
+                <div>
                     <input type="button" name="primary" class="btn" :value="labels.btn_value" @click="labelSave">
                 </div>
             </div>
@@ -38,7 +38,6 @@ export default {
   methods: {
     // labels选择事件
     labelSelect(labels, selectId) {
-      console.log("1111111111111111", labels.id, selectId.id);
     },
     // 保存
     labelSave() {
@@ -60,8 +59,7 @@ export default {
     // 获取标签数据
     getLabelData() {
       // api地址
-      console.log("document", document.cookie);
-      let url = "./static/labelData.json";
+      let url = "../../static/labelData.json";
       this.$http.get(url).then(res => {
           if (res.data.success) {
               this.labels.labelData = res.data.data;

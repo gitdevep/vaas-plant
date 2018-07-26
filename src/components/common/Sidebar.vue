@@ -1,25 +1,10 @@
 <template>
-    <div class="sidebar">
-        <el-menu class="sidebar-el-menu" :default-active="onRoutes" :collapse="collapse" background-color="#324157"
-            text-color="#bfcbd9" active-text-color="#20a0ff" unique-opened router>
-            <template v-for="item in items">
-                <template v-if="item.subs">
-                    <el-submenu :index="item.index" :key="item.index">
-                        <template slot="title">
-                            <i :class="item.icon"></i><span slot="title">{{ item.title }}</span>
-                        </template>
-                        <el-menu-item v-for="(subItem,i) in item.subs" :key="i" :index="subItem.index">
-                            {{ subItem.title }}
-                        </el-menu-item>
-                    </el-submenu>
-                </template>
-                <template v-else>
-                    <el-menu-item :index="item.index" :key="item.index">
-                        <i :class="item.icon"></i><span slot="title">{{ item.title }}</span>
-                    </el-menu-item>
-                </template>
-            </template>
-        </el-menu>
+    <div class="side-bar">
+        <div style="margin-top:14px; cursor:pointer; color:#409EFF">
+            <ul  v-for="item in items" :index="item.index" :key="item.index">
+                <li @click="goRoute(item.index)">{{item.title}}</li>
+            </ul>
+        </div>
     </div>
 </template>
 
@@ -34,14 +19,22 @@ export default {
           icon: "el-icon-document",
           index: "filemanage",
           title: "文件管理"
+        },
+        {
+          icon: "el-icon-document",
+          index: "fileupload",
+          title: "文件上传"
         }
       ]
     };
   },
   computed: {
-    onRoutes() {
-      return this.$route.path.replace("/", "");
-    }
+  },
+  methods:{
+      goRoute(path) {
+          console.log("path=============",path)
+          this.$router.push({ path: path})
+      }
   },
   created() {
     // 通过 Event Bus 进行组件间通信，来折叠侧边栏

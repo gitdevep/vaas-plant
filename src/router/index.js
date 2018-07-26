@@ -25,6 +25,11 @@ export default new Router({
                     meta: { title: '文件管理' }
                 },
                 {
+                    path:'/fileupload',
+                    component: resolve => require(['../components/page/FileManageUpload.vue'], resolve),
+                    meta: {title: '文件上传'}
+                },
+                {
                     path: '/table',
                     component: resolve => require(['../components/page/BaseTable.vue'], resolve),
                     meta: { title: '基础表格' }
@@ -79,11 +84,6 @@ export default new Router({
                     path: '/permission',
                     component: resolve => require(['../components/page/Permission.vue'], resolve),
                     meta: { title: '权限测试', permission: true }
-                },
-                {
-                    path:'/fileupload',
-                    component: resolve => require(['../components/page/FileUpload.vue'], resolve),
-                    meta: {title: '文件上传'}
                 }
             ]
         },

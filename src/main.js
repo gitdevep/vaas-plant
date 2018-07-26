@@ -3,17 +3,31 @@ import App from './App';
 import router from './router';
 import axios from 'axios';
 import ElementUI from 'element-ui';
+import Validator from 'vue-validator';
+
 import 'element-ui/lib/theme-chalk/index.css';    // 默认主题
 // import '../static/css/theme-green/index.css';       // 浅绿色主题
 import "babel-polyfill";
+//后台api地址
+import interfaceApi from '../static/js/interface';
+
+import message from '../static/js/message';
+console.log("message==", message);
 
 import '../static/css/common.css';  //引入头部、底部、左侧和tags的样式
 // 引入各个控件的通用样式
 import '../static/css/button-common.css';
 import '../static/css/modal.css';
+import '../static/css/login.css';
 
 Vue.use(ElementUI, { size: 'small' });
+Vue.use(Validator);
+
+axios.defaults.timeout = 5000;
+axios.defaults.baseURL = process.env.NODE_ENV ==='development' ? process.env.API_ROOT : process.dev.API_ROOT;
 Vue.prototype.$http = axios;
+Vue.prototype.$interfaceApi = interfaceApi;
+Vue.prototype.$message = message;
 
 //使用钩子函数对路由进行权限跳转
 router.beforeEach((to, from, next) => {

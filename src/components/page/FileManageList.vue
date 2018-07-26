@@ -1,22 +1,15 @@
 <template>
     <div>
         <div>
-            <div style="display:flex; flex-wrap:wrap">
+            <div class="vas-picture-list-item">
                 <div class="vas-picture-list" @click="selectPicture">
                     <img v-bind:src="imgUrl" style="padding:10px; width:130px; height:130px">
-                    <div class="list-checkbox"><input type="checkbox" checked="checked"></div>
                 </div>
-                <div class="vas-picture-list" @click="selectPicture">
-                    <img v-bind:src="imgUrl1" style="padding:10px; width:130px; height:130px">
-                    <div class="list-checkbox"><input type="checkbox" checked="checked"></div>
-                </div>
-
             </div>
         </div>
-
-        <div style="margin:20px 20px 20px 20px; background:#000;height:100%">
-            <img v-bind:src="imgUrl2" style="width:100%;">
-        </div>      
+         <div class="vas-picture-display">
+            <img v-bind:src="imgUrl1" style="padding:20px;width:800px;height:800px">
+        </div>
     </div>
 </template>
 <script>

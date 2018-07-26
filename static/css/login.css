@@ -1,0 +1,177 @@
+.vas-wrap {
+    width: 100%;
+    height: 100%;
+}
+.vas-login-wrap {
+    height: 100%;
+    width: 100%;
+    background: url("../img/login/login-bg.jpg") no-repeat 50%;
+    background-color: #072858;
+    background-color: rgba(7,40,88,.8);
+    background-size: 100% 100%;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+.vas-login {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    min-width: 600px;
+    min-height: 800px;
+}
+.vas-login-logo {
+    width: 100%;
+    height: 88px;
+    background: url("../img/login/logo.png") no-repeat 50%;
+    background-size: auto 100%;
+}
+.vas-login-form {
+    position: relative;
+    width: 100%;
+}
+.vas-login-form .el-title {
+    width: 100%;
+    height: 80px;
+    line-height: 80px;
+    font-size: 33px;
+    color: #fefefe;
+    text-align: center;
+    margin-top: 40px;
+}
+.vas-login-form .el-input-line {
+    height: 44px;
+    width: 398px;
+    margin: 30px auto;
+    display: flex;
+}
+.vas-login-form .el-label {
+    cursor: pointer;
+    width: 88px;
+    height: 44px;
+    font-size: 16px;
+    text-align: right;
+    background: url("../img/login/input-label-bg.png");
+    float: left;
+    color: #fdfcfe;
+    line-height: 44px;
+    overflow: hidden;
+}
+.vas-login-form .el-label label {
+    cursor: pointer;
+    font-size: 16px;
+}
+.vas-login-form .el-input {
+    height: 44px;
+    background: url("../img/login/input-bg.png");
+    background-size: auto 100%;
+    width: 310px;
+}
+.vas-login-form .el-input input {
+    outline: none;
+    width: 100%;
+    border: none;
+    background: none;
+    height: 44px;
+    line-height: 44px;
+    padding: 0;
+    margin: 0;
+    text-indent: 16px;
+    font-size: 16px;
+    color: #6ab2f4;
+    min-width: 0px;
+    font-family: inherit;
+}
+input::-webkit-input-placeholder { /* WebKit browsers*/ 
+    color:#6ab2f4;
+    font-size:16px;
+}
+input:-moz-placeholder {  /* Mozilla Firefox 4 to 18*/ 
+    color:#6ab2f4;
+    font-size:16px;
+}
+input::-moz-placeholder {  /* Mozilla Firefox 19+*/ 
+    color:#6ab2f4;
+    font-size:16px;
+}
+input:-ms-input-placeholder { /* Internet Explorer 10+*/ 
+    color:#6ab2f4;
+    font-size:16px;
+}
+.el-input-code {
+    width: 178px !important;
+}
+.vas-login-form .el-code {
+    width: 120px;
+    height: 44px;
+    background: url("../img/login/input-code-bg.png");
+    background-size: auto 100%;
+    line-height: 44px;
+    text-align: center;
+    font-size: 16px;
+    color: #222;
+    margin-left: 10px;
+}
+.vas-login-form .el-code img {
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}
+.vas-login-form .el-input-oprate {
+    height: 30px;
+    margin-top: -10px;
+    width: 400px;
+    margin: -10px auto 0;
+    color: #f4fcfe;
+    font-size: 15px;
+}
+.vas-login-form .el-input-oprate span.check {
+    padding-left: 25px;
+    background: url("../img/login/login-check.png") no-repeat 0;
+    position: relative;
+    cursor: pointer;
+}
+.vas-login-form .check-yes {
+    width: 20px;
+    height: 20px;
+    background: url("../img/login/login-check-yes.png") no-repeat 0;
+    z-index: 99;
+    position: absolute;
+    left: 0px;
+}
+.vas-login-form .el-input-oprate span.forget {
+    color: #f7d550;
+    float: right;
+    cursor: pointer;
+}
+.el-input-btn {
+    width: 100%;
+    height: 75px;
+    background: url("../img/login/login-btn-animation.png") no-repeat 50%;
+    position: relative;
+}
+.el-input-btn .btn-animation {
+    width: 100%;
+    height: 75px;
+    position: absolute;
+    background: url("../img/login/login-btn-border.png") no-repeat 50%;
+    -webkit-animation: shine 4s linear .1s infinite;
+    animation: shine 4s linear .1s infinite;
+}
+.clearfloat {clear:both}
+.btn-animation button{
+    cursor: pointer;
+    width: 390px;
+    height: 44px;
+    border: none;
+    background: url("../img/login/login-btn.png") no-repeat 50%;
+    background-size: 100% 100%;
+    margin: 0 auto;
+    display: block;
+    top: 15px;
+    position: relative;
+    outline: none;
+    color: #fefefe;
+    letter-spacing: 4px;
+    font-size: 18px;
+ }
