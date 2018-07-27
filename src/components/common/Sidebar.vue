@@ -24,6 +24,51 @@ export default {
           icon: "el-icon-document",
           index: "fileupload",
           title: "文件上传"
+        },
+        {
+          icon: "el-icon-document",
+          index: "pagination",
+          title: "分页"
+        },
+        {
+          icon: "el-icon-document",
+          index: "button",
+          title: "按钮"
+        },
+        {
+          icon: "el-icon-document",
+          index: "modal",
+          title: "弹框"
+        },
+        {
+          icon: "el-icon-document",
+          index: "input",
+          title: "输入框"
+        },
+        {
+          icon: "el-icon-document",
+          index: "checkbox",
+          title: "复选框"
+        },
+        {
+          icon: "el-icon-document",
+          index: "select",
+          title: "选择框"
+        },
+        {
+          icon: "el-icon-document",
+          index: "table",
+          title: "基础表格"
+        },
+        {
+          icon: "el-icon-document",
+          index: "uploadcomponent",
+          title: "上传组件"
+        },
+        {
+          icon: "el-icon-document",
+          index: "detail",
+          title: "详情组件"
         }
       ]
     };
@@ -32,7 +77,6 @@ export default {
   },
   methods:{
       goRoute(path) {
-          console.log("path=============",path)
           this.$router.push({ path: path})
       }
   },

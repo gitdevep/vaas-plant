@@ -30,6 +30,7 @@ a {
 .content {
     width: 100%;
     margin-top: 20px;
+    overflow: auto;
 }
 
 .content-collapse {

@@ -10,9 +10,8 @@ import 'element-ui/lib/theme-chalk/index.css';    // 默认主题
 import "babel-polyfill";
 //后台api地址
 import interfaceApi from '../static/js/interface';
-
+//通用的信息提示和图片滚动放大缩小
 import message from '../static/js/message';
-console.log("message==", message);
 
 import '../static/css/common.css';  //引入头部、底部、左侧和tags的样式
 // 引入各个控件的通用样式

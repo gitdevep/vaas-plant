@@ -31,8 +31,73 @@ function showTips(type, content) {
         'line-height': '24px',
     }).show();
     setTimeout( function(){$( 'div.tipsClass' ).fadeOut();}, ( 3000 ) );  
+};
+
+function bigimg(){
+    var myimage = document.getElementById("myimage");
+    var rX,
+      rY,
+      bgX = 0,
+      bgY = 0,
+      $b = document.getElementById("box"),
+      i = $b.getElementsByTagName("img")[0],
+      ww = parseInt($b.style.width),
+      wh = parseInt($b.style.height),
+      imgw = parseInt(myimage.style.width),
+      imgh = parseInt(myimage.style.height),
+      scaleSize = 1;
+    if (myimage.addEventListener) {
+      // IE9, Chrome, Safari, Opera
+      myimage.addEventListener("mousewheel", MouseWheelHandler, false);
+      // Firefox
+      myimage.addEventListener("DOMMouseScroll", MouseWheelHandler, false);
+    } else myimage.attachEvent("onmousewheel", MouseWheelHandler);
+    //为了让不同浏览器都能支持的处理做法,我们将对Firefox的detail值取反然后返回1或者-1的其中一个
+    function MouseWheelHandler(e) {
+      //以鼠标为中心缩放，同时进行位置调整
+      var deltaY = 0;
+      var x = e.pageX;
+      var y = e.pageY;
+
+      e.preventDefault();
+
+      if (e.target && e.target === i) {
+        var l = getOffset($b);
+        x = x - l.left;
+        y = y - l.top;
+
+        var p = e.wheelDelta / 1200;
+        var ns = scaleSize;
+        ns += p;
+        ns = ns < 0.1 ? 0.1 : ns > 5 ? 5 : ns; //可以缩小到0.1,放大到5倍
+
+        //计算位置，以鼠标所在位置为中心
+        //以每个点的x、y位置，计算其相对于图片的位置，再计算其相对放大后的图片的位置
+        bgX = bgX - (x - bgX) * (ns - scaleSize) / scaleSize;
+        bgY = bgY - (y - bgY) * (ns - scaleSize) / scaleSize;
+        scaleSize = ns; //更新倍率
+
+        myimage.style.width = imgw * ns + "px";
+        myimage.style.height = imgh * ns + "px";
+        myimage.style.top = bgY + "px";
+        myimage.style.left = bgX + "px";
+      }
+    }
+    function getOffset(o) {
+      var left = 0,
+        top = 0;
+      while (o != null && o != document.body) {
+        top += o.offsetTop;
+        left += o.offsetLeft;
+        o = o.offsetParent;
+      }
+      return {
+        left: left,
+        top: top
+      };
+    }
 }
 
 export default {
-    showTips
+    showTips, bigimg
 }

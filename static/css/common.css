@@ -137,6 +137,9 @@
     text-align: center;
     line-height: 50px;
 }
+.side-bar li:active{
+    color:#e9eaec; 
+}
 /*Sidebar.vue的样式 end*/
 /*Tags.vue的样式 start*/
 .tags {
