@@ -36,7 +36,7 @@ export default new Router({
                 },
                 {
                     path: '/pagination',
-                    component: resolve => require(['../components/page/baseComponents/Pagination.vue'], resolve),
+                    component: resolve => require(['../components/page/baseComponents/BasePagination.vue'], resolve),
                     meta: { title: '分页' }
                 },
                 {

@@ -45,7 +45,7 @@
 import fileManageList from "./FileManageList.vue";
 import fileUploadLabel from "./FileUploadLabel.vue";
 import fileUpload from "./FileUpload.vue";
-import pagination from "@/components/page/baseComponents/pagination";
+import pagination from "../baseComponents/pagination.vue";
 export default {
   name: "fileManage",
   data() {
