@@ -12,26 +12,11 @@
                         <input type="button" name="primary" class="btn" :id="btn[2].id"  :value="btn[2].value" @click="cancleShare">
                     </div>
                 </div>
-                <div v-bind:style="{'margin-top': '20px'}">
-                    <div  class="vas-list-btn">
-                        <div>
-                            <div class="title">{{detail.title}}</div>
-                        </div>
-                        <div class="content-common">
-                            <div class="vas-detal">
-                                <label>{{detail.name.name}}</label>
-                                <label>{{detail.name.value}}</label>
-                            </div>
-                             <div>
-                                <label>{{detail.source.name}}</label>
-                                <label>{{detail.source.value}}</label>
-                            </div>
-                             <div>
-                                <label>{{detail.algorithm.name}}</label>
-                                <label>{{detail.algorithm.value}}</label>
-                            </div>
-                        </div>
-                    </div>
+                <div>
+                  <v-detail :detail="detail"></v-detail>
+                </div>
+                <div>
+                    <v-share v-bind:shareData ="shareData"></v-share>
                 </div>
             </div>
         </div>
@@ -45,7 +30,10 @@
 import fileManageList from "./FileManageList.vue";
 import fileUploadLabel from "./FileUploadLabel.vue";
 import fileUpload from "./FileUpload.vue";
-import pagination from "../baseComponents/pagination.vue";
+import pagination from "../baseComponents/Pagination.vue";
+import share from "../baseComponents/Share.vue";
+import detail from "../baseComponents/Detail.vue";
+
 export default {
   name: "fileManage",
   data() {
@@ -69,37 +57,46 @@ export default {
       ],
       detail: {
         title: "图片详情",
-        name: {
-          name: "图片名称",
-          value: "aaaaa"
-        },
-        source: {
-          name: "来源",
-          value: "私有云"
-        },
-        algorithm: {
-          name: "算法",
-          value: "Base加密"
+        value: [
+          {
+            name: "名称",
+            value: "aaaaa"
+          },
+          {
+            name: "来源",
+            value: "私有云"
+          },
+          {
+            name: "算法",
+            value: "Base加密"
+          }]
+      },
+      shareData: {
+        btn: {
+          title: "分享",
+          id: "shareSave",
+          value: "保存",
         }
       },
-      selectData: []
+      selectPictureData: []
     };
   },
   components: {
     fileUploadLabel,
     fileManageList,
     fileUpload,
-    'v-pagination': pagination
+    "v-pagination": pagination,
+    "v-share": share,
+    "v-detail": detail
   },
   created() {},
   methods: {
-    pagechange:function(currentPage){
-       console.log(currentPage);
-       // ajax请求, 向后台发送 currentPage, 来获取对应的数据
-
+    pagechange: function(currentPage) {
+      console.log(currentPage);
+      // ajax请求, 向后台发送 currentPage, 来获取对应的数据
     },
     delAll() {
-      if (this.selectData.length === 0) {
+      if (this.selectPictureData.length === 0) {
         this.$message.showTips("warn", "请选择要删除的图片。");
       } else {
         this.$http.post().then(res => {
@@ -115,7 +112,7 @@ export default {
       }
     },
     share() {
-      if (this.selectData.length === 0) {
+      if (this.selectPictureData.length === 0) {
         this.$message.showTips("warn", "请选择要分享的图片。");
       } else {
         this.$http.post().then(res => {
@@ -131,7 +128,7 @@ export default {
       }
     },
     cancleShare() {
-      if (this.selectData.length === 0) {
+      if (this.selectPictureData.length === 0) {
         this.$message.showTips("warn", "请选择要取消分享的图片。");
       } else {
         this.$http.post().then(res => {
@@ -147,7 +144,8 @@ export default {
       }
     },
     modalCallback(data) {
-      this.selectData = JSON.parse(JSON.stringify(data));
+      this.selectPictureData = JSON.parse(JSON.stringify(data));
+      this.detail.selectPictureData = this.selectPictureData;
     }
   }
 };

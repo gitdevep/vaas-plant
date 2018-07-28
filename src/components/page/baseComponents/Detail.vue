@@ -1,22 +1,14 @@
 <template>
     <div>
-        <div v-bind:style="{'margin-top': '20px'}">
+        <div>
             <div  class="vas-list-btn">
                 <div>
                     <div class="title">{{detail.title}}</div>
                 </div>
-                <div class="content-common">
-                    <div class="vas-detal">
-                        <label>{{detail.name.name}}</label>
-                        <label>{{detail.name.value}}</label>
-                    </div>
-                    <div>
-                        <label>{{detail.source.name}}</label>
-                        <label>{{detail.source.value}}</label>
-                    </div>
-                    <div>
-                        <label>{{detail.algorithm.name}}</label>
-                        <label>{{detail.algorithm.value}}</label>
+                <div style="margin-left: 20px;color: #fff;line-height: 32px;font-size: 14px; text-align: left;">
+                    <div v-for="(value, index) in detail.value" :key="index">
+                        <span class="detail-info-title">{{value.name}}</span>
+                        <span class="detail-info-value">{{value.value}}</span>
                     </div>
                 </div>
             </div>
@@ -28,22 +20,17 @@
 export default {
   data() {
     return {
+    }
+  },
+  props: {
       detail: {
-        title: "图片详情",
-        name: {
-          name: "图片名称",
-          value: "aaaaa"
-        },
-        source: {
-          name: "来源",
-          value: "私有云"
-        },
-        algorithm: {
-          name: "算法",
-          value: "Base加密"
-        }
+          type: Object,
+          default: function(e){
+              return {
+                  
+              }
+          }
       }
-    };
   }
 };
 </script>

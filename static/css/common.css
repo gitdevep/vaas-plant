@@ -229,7 +229,7 @@
     margin-left: 30px;
 }
 .title {
-    padding: 20px;
+    padding: 20px 0px 0px 20px;
     color: #1ed8d8;
 }
 .btn-center {
@@ -288,6 +288,18 @@
     position: relative;
     height: auto;
 }
+.vas-detal {
+    margin-left: 40px;
+}
 .vas-detal>div>label {
+    text-align: left;
+}
+.detail-info-title {
+    display: inline-block;
+    margin-left: 20px;
+}
+.detail-info-value {
+    display: inline-block;
+    margin-left: 40px;
     text-align: left;
 }
