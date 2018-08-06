@@ -1,5 +1,6 @@
 import $ from 'jquery';
 
+// 消息提示
 function showTips(type, content) {
     //窗口的宽度  
     var windowWidth = $(window).width();
@@ -33,6 +34,7 @@ function showTips(type, content) {
     setTimeout( function(){$( 'div.tipsClass' ).fadeOut();}, ( 3000 ) );  
 };
 
+// 图片放大缩小
 function bigimg(){
     var myimage = document.getElementById("myimage");
     var rX,
@@ -98,6 +100,16 @@ function bigimg(){
     }
 }
 
+// 图片下载
+function download(src) {
+  $('#myimage').attr('src', src);
+  var img = $('#myimage').attr("src");
+  var alink = document.createElement("a");
+  alink.href = img;
+  alink.download = "";
+  alink.click();
+}
+
 export default {
-    showTips, bigimg
+    showTips, bigimg, download
 }

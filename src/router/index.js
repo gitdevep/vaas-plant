@@ -77,31 +77,31 @@ export default new Router({
                 {
                     // 富文本编辑器组件
                     path: '/editor',
-                    component: resolve => require(['../components/page/business/VueEditor.vue'], resolve),
+                    component: resolve => require(['../components/page/demo/VueEditor.vue'], resolve),
                     meta: { title: '富文本编辑器' }
                 },
                 {
                     // markdown组件
                     path: '/markdown',
-                    component: resolve => require(['../components/page/business/Markdown.vue'], resolve),
+                    component: resolve => require(['../components/page/demo/Markdown.vue'], resolve),
                     meta: { title: 'markdown编辑器' }    
                 },
                 {
                     // 图片上传组件
                     path: '/upload',
-                    component: resolve => require(['../components/page/business/Upload.vue'], resolve),
+                    component: resolve => require(['../components/page/demo/Upload.vue'], resolve),
                     meta: { title: '文件上传' }   
                 },
                 {
                     // vue-schart组件
                     path: '/charts',
-                    component: resolve => require(['../components/page/business/BaseCharts.vue'], resolve),
+                    component: resolve => require(['../components/page/demo/BaseCharts.vue'], resolve),
                     meta: { title: 'schart图表' }
                 },
                 {
                     // 拖拽列表组件
                     path: '/drag',
-                    component: resolve => require(['../components/page/business/DragList.vue'], resolve),
+                    component: resolve => require(['../components/page/demo/DragList.vue'], resolve),
                     meta: { title: '拖拽列表' }
                 }
             ]
@@ -111,12 +111,16 @@ export default new Router({
             component: resolve => require(['../components/page/business/Login.vue'], resolve)
         },
         {
+            path: '/regist',
+            component: resolve => require(['../components/page/business/Regist.vue'], resolve)
+        },
+        {
             path: '/404',
-            component: resolve => require(['../components/page/business/404.vue'], resolve)
+            component: resolve => require(['../components/page/demo/404.vue'], resolve)
         },
         {
             path: '/403',
-            component: resolve => require(['../components/page/business/403.vue'], resolve)
+            component: resolve => require(['../components/page/demo/403.vue'], resolve)
         },
         {
             path: '*',

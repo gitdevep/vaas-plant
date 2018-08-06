@@ -1,10 +1,10 @@
 <template>
-                <div>
-                    <div class="vas-list-btn" style="height:360px">
+                <div v-if="shareData.btn.show">
+                    <div class="vas-list-btn" style="min-height:350px">
                         <div>
                             <div class="title">{{shareData.btn.title}}</div>
                         </div>
-                        <div class="container-table">
+                        <div class="container-table" style="height: 250px; overflow: auto;">
                             <table class="form-table" cellpadding="0" cellspacing="0">
 
                                 <thead class="fixed-thead">
@@ -21,42 +21,24 @@
                                   </tr>
                                 </tbody>
                             </table>
-                        </div>
-                        <div style="text-align: center;">
-                          <input type="button" name="primary" class="btn" :id="shareData.btn.id"  :value="shareData.btn.value" @click="shareSave">
+                            <div style="text-align: center; margin-top:10px;">
+                              <input type="button" name="primary" class="btn" :id="shareData.btn.id"  :value="shareData.btn.value" @click="shareSave">
+                            </div>
                         </div>
                     </div>
                 </div>   
 </template>
 
 <script>
+import bus from "../../common/bus";
+
 export default {
   data() {
     return {
       selectAll: false,
       selectUserData: [],
-      userInfo: [
-        {
-          id: "0001",
-          name: "张珊"
-        },
-        {
-          id: "0002",
-          name: "张珊"
-        },
-        {
-          id: "0003",
-          name: "张珊"
-        },
-        {
-          id: "0004",
-          name: "张珊"
-        },
-        {
-          id: "0005",
-          name: "张珊"
-        }
-      ]
+      userInfo: [],
+      selectPictureData: []
     };
   },
   props: {
@@ -65,6 +47,8 @@ export default {
       default: function(e) {
         return {
           btn: {
+            show: false,
+            type: "share",
             title: "分享",
             id: "shareSave",
             value: "保存"
@@ -74,10 +58,89 @@ export default {
     }
   },
   created() {
-    this.getUserData();
+  },
+  mounted() {
+    bus.$on("modalCallback", (data) => {
+      this.selectPictureData = JSON.parse(JSON.stringify(data));
+    });
+    bus.$on("cancleFileShare", (data) => {
+      this.getUserData(data.fileId);
+    });
+    bus.$on("getUserInfo", (data) => {
+      this.selectUserData = [];
+      this.getUserData();
+    })
   },
   methods: {
-    getUserData() {},
+    getUserData(id) {
+      this.selectUserData = [];
+      this.userInfo = [];
+      if(id){  // 取消分享的逻辑处理
+        this.$http.post(this.$interfaceApi.GetShareInfo, {"fileId": id}).then(res => {
+          if(res.data.success){
+             let sharedata = res.data.data;
+             this.$http.get(this.$interfaceApi.UserList).then(res => {
+               if(res.data.success){
+                  res.data.data.forEach((value, index) => {
+                    sharedata.forEach((v,k)=>{
+                      if(value.userId===v.userId){
+                        var map = {
+                          id: v.userId,
+                          accountId: v.accountId,
+                          name: value.userName
+                        }
+                        this.userInfo.push(map);
+                      }
+                    })
+                })
+               }
+             })
+
+          }else {
+            this.$message.showTips("error", res.data.msg);
+          }
+        }).catch(error => {
+         this.$message.showTips("error", error);
+        });
+      }else { //分享的逻辑处理
+        this.$http.get(this.$interfaceApi.UserList).then(res => {
+          if(res.data.success){
+            let userData = res.data.data;
+            // 获取分享记录，查看是否有已经分享的人
+            let id = this.selectPictureData[0];
+            let _index = [];
+            this.$http.post(this.$interfaceApi.GetShareInfo, {"fileId": id}).then(res => {
+                if(res.data.success){
+                    userData.forEach((value, index) => {
+                      res.data.data.forEach((v,k)=>{
+                        if(value.userId===v.userId){
+                          _index.push(index);
+                        }
+                      })
+                  })
+                  if(_index.length>0){
+                    for(var i=0;i<_index.length;i++){
+                        userData.splice((_index[i]-i),1);
+                    }
+                  }
+                  userData.forEach((value, index) => {
+                    var map = {
+                      id: value.userId,
+                      accountId: value.accountId,
+                      name: value.userName
+                    }
+                    this.userInfo.push(map);
+                  })
+                }
+             })
+          }else {
+            this.$message.showTips("error", res.data.msg);
+          }
+        }).catch(error => {
+         this.$message.showTips("error", error);
+        });
+      }
+    },
     selectFile(value) {
       if (value.checked) {
         this.selectUserData.push(value.id);
@@ -90,7 +153,6 @@ export default {
         });
         this.selectUserData.splice(_index, 1);
       }
-      console.log("this.selectUserData", this.selectUserData);
     },
     allSelect() {
       if (this.selectAll) {
@@ -106,10 +168,31 @@ export default {
       }
     },
     shareSave() {
-      console.log("this.selectUserData", this.selectUserData);
       if (this.selectUserData.length === 0) {
-        this.$message.showTips("warn", "请选择要分享的用户。");
-      } else {
+        this.$message.showTips("warn", "请选择用户。");
+      } else if(this.selectPictureData.length === 0){
+        this.$message.showTips("warn", "请选择一张图片。");
+      }else {
+        let params = {
+          userId:this.selectUserData.join(","),
+          fileId: this.selectPictureData.join(",")
+        }
+        let url = this.$interfaceApi.ShareInfo;
+        if(this.shareData.btn.type === "cancleShare"){
+          url = this.$interfaceApi.CancleShareInfo;
+        }
+        this.$http.post(url, params).then((res)=>{
+          if(res.data.success){
+            this.shareData.btn.show = false;
+            bus.$emit("shareInfo", {"success": true});
+            this.getUserData();
+          }else {
+            this.$message.showTips("error", res.data.msg);
+          }
+         
+        }).catch((error) =>{
+          this.$message.showTips("error", error);
+        })
       }
     }
   }

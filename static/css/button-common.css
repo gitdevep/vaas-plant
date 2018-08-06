@@ -13,9 +13,11 @@
     margin: 0;
     -o-transition: .1s;
     transition: .1s;
-    width: 80px;
+    width: 100px;
     height: 30px;
     border-radius: 4px;
+    font-size: 14px;
+    font-family: inherit;
 }
 [name=primary]:active{
     background-color: #409EFF;
@@ -42,6 +44,9 @@
 [name=danger]:hover{
     background-color: #f18b8b;
     border-color: #f18b8b;
+}
+.btn.active{
+    background: #26a69a;
 }
 
 /*表格、输入框、选择框、label的通用样式 start*/
@@ -95,14 +100,15 @@
   label[for=uploadFile] {
       position: absolute;
       border: 1px solid dcdfe6;
-      height: 32px;
-      line-height: 32px;
-      width: 120px;
+      height: 30px;
+      line-height: 30px;
+      width: 100px;
       text-align: center;
       border-radius: 4px;
       cursor: pointer;
       background: #409EFF;
       color: #fff;
+      bottom: 10px;
   }
   input[type='checkbox']{
       width: 16px;
@@ -113,6 +119,7 @@
       border-radius: 2px;
       outline: none;
       cursor: pointer;
+      vertical-align: middle;
   }
   input[type=checkbox]:checked{
       background: url("../img/checkbox_icon.png") no-repeat center;
@@ -188,6 +195,10 @@
     max-width: 120px;
     margin-left: 20px;
     font-size: 14px;
+    white-space: nowrap;
+    overflow: hidden;
+    -o-text-overflow: ellipsis;
+    text-overflow: ellipsis;
 }
 .tip{
 	margin: 0 auto;
@@ -199,4 +210,12 @@
 	-webkit-box-sizing: border-box;
 	-ms-box-sizing: border-box;
 	box-sizing: border-box;
+}
+.btn-margin{
+    margin:10px 0px 0px 10px;
+}
+.btn-display-des{
+    display:flex;
+    flex-wrap: wrap;
+    line-height: 32px;
 }

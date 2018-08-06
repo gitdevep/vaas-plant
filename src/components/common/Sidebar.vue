@@ -2,7 +2,7 @@
     <div class="side-bar">
         <div style="margin-top:14px; cursor:pointer; color:#409EFF">
             <ul  v-for="item in items" :index="item.index" :key="item.index">
-                <li @click="goRoute(item.index)">{{item.title}}</li>
+                <li  class="collection-item" :class="{active: activeName == item.index}" @click="goRoute(item)">{{item.title}}</li>
             </ul>
         </div>
     </div>
@@ -14,7 +14,18 @@ export default {
   data() {
     return {
       collapse: false,
-      items: [
+      activeName: "",
+      items: [{
+          icon: "el-icon-document",
+          index: "filemanage",
+          title: "文件管理"
+        },
+        {
+          icon: "el-icon-document",
+          index: "fileupload",
+          title: "文件上传"
+        }],
+      _items: [
         {
           icon: "el-icon-document",
           index: "filemanage",
@@ -76,15 +87,15 @@ export default {
   computed: {
   },
   methods:{
-      goRoute(path) {
-          this.$router.push({ path: path})
+      goRoute(item) {
+        this.activeName = item.index;
+        this.$router.push({ path: item.index})
       }
   },
   created() {
-    // 通过 Event Bus 进行组件间通信，来折叠侧边栏
-    bus.$on("collapse", msg => {
-      this.collapse = msg;
-    });
+    let path = window.location.hash;
+    path = path.replace("#/","");
+    this.activeName = path;
   }
 };
 </script>

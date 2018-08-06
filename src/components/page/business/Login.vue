@@ -29,14 +29,14 @@
                             <input v-model="ruleForm.loginCode" id="username" name="username" value="" placeholder="请输入验证码">
                         </div>
                         <div class="el-code" @click="getLoginCode">
-                            <img v-bind:src="ruleForm.loginCodeImg">
+                            <img class="el-code-img" v-bind:src="ruleForm.loginCodeImg">
                         </div>
                     </div>
                     <div class="el-input-oprate">
                         <span class="check" @click="switchPassword"><span v-if="switchRemember" class="check-yes"></span>记住密码</span>
-                        <span class="forget" onClick={this.goForget}>忘记密码 ?</span>
+                        <span class="forget" @click="goForget">忘记密码 ?</span>
                         <span class="forget">&nbsp;&nbsp;</span>
-                        <span class="forget" onClick={this.goRegist}>注册</span>
+                        <span class="forget" @click="goRegist">注册</span>
                     </div>
                     <div class="clearfloat"></div>
                     <div class="el-input-btn">
@@ -76,6 +76,12 @@ export default {
     this.getLoginCode();
   },
   methods: {
+    goRegist() {
+        this.$router.push("regist");
+    },
+    goForget() {
+
+    },
     getLoginCode() {
       this.$http.get(this.$interfaceApi.RequestLoginCode).then(res => {
         this.ruleForm.loginCodeImg = res.data.data.img;
@@ -87,12 +93,15 @@ export default {
     },
     login() {
       if (this.ruleForm.username === "") {
+        this.$message.showTips("warn","请输入账号");
         return false;
       }
       if (this.ruleForm.password === "") {
+        this.$message.showTips("warn","请输入密码");
         return false;
       }
       if (this.ruleForm.loginCode == "") {
+        this.$message.showTips("warn","请输入验证码");
         return false;
       }
 
@@ -106,7 +115,9 @@ export default {
       this.$http.post(this.$interfaceApi.Login, logindata).then( res => {
           if(res.data.success){
               localStorage.setItem("ms_username", this.ruleForm.username);
+              localStorage.setItem("username", res.data.data.userName);
               localStorage.setItem("ms_token", this.ruleForm.token);
+              localStorage.setItem("token", `${res.data.data.tokenType} ${res.data.data.accessToken}`);
           }
           if(this.switchRemember){
               localStorage.setItem("ms_paasword", this.ruleForm.password);

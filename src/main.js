@@ -11,7 +11,7 @@ import "babel-polyfill";
 //后台api地址
 import interfaceApi from '../static/js/interface';
 //通用的信息提示和图片滚动放大缩小
-import message from '../static/js/message';
+import common from '../static/js/common';
 
 import '../static/css/common.css';  //引入头部、底部、左侧和tags的样式
 // 引入各个控件的通用样式
@@ -22,11 +22,22 @@ import '../static/css/login.css';
 Vue.use(ElementUI, { size: 'small' });
 Vue.use(Validator);
 
-axios.defaults.timeout = 5000;
+axios.defaults.timeout = 30000;
 axios.defaults.baseURL = process.env.NODE_ENV ==='development' ? process.env.API_ROOT : process.dev.API_ROOT;
+axios.interceptors.request.use(
+    config => {
+        if (localStorage.getItem("token")) {
+            config.headers.Authorization = localStorage.getItem("token");
+        }
+        return config
+    },
+    error => {
+        return Promise.reject(error)
+    }
+);
 Vue.prototype.$http = axios;
 Vue.prototype.$interfaceApi = interfaceApi;
-Vue.prototype.$message = message;
+Vue.prototype.$message = common;
 
 //使用钩子函数对路由进行权限跳转
 router.beforeEach((to, from, next) => {
@@ -34,6 +45,7 @@ router.beforeEach((to, from, next) => {
     if(!role && to.path !== '/login'){
         next('/login');
     }else if(to.meta.permission){
+        console.log("to========",to.meta.permission)
         // 如果是管理员权限则可进入，这里只是简单的模拟管理员权限而已
         role === 'admin' ? next() : next('/403');
     }else{

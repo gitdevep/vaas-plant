@@ -1,8 +1,8 @@
 <template>
     <div class="header">
         <!-- 折叠按钮 -->
-        <div class="collapse-btn" @click="collapseChage">
-            <i class="el-icon-menu"></i>
+        <div style = "float:left" @click="collapseChage">
+            <img src="static/img/login/login-header.png" style="margin-left:40px;margin-right:20px; margin-top:6px;">
         </div>
         <div class="logo">江苏环实科技</div>
         <div class="header-right">
@@ -24,10 +24,14 @@
                     <span class="btn-bell-badge" v-if="message"></span>
                 </div>-->
                 <!-- 用户头像 -->
-                <div class="user-avator"><img src="static/img/img.jpg">
+                <div class="user-avator">
+                     <img src="static/img/userinfo.png">
                     <div class="user-info"><span>{{username}}</span></div>
                 </div>
-                <div class="user-login-out" v-on:click="handleCommand('loginout')"><span>退出</span></div>
+                <div class="user-avator" v-on:click="handleCommand('loginout')">
+                    <img src="static/img/loginout.png">
+                    <div class="user-info"> <span>退出</span></div>
+                </div>
                 <!-- 用户名下拉菜单 
                 <el-dropdown class="user-name" trigger="click" @command="handleCommand">
                     <span class="el-dropdown-link">
@@ -48,13 +52,13 @@
             return {
                 collapse: false,
                 fullscreen: false,
-                name: 'linxin',
+                name: '系统管理员',
                 message: 2
             }
         },
         computed:{
             username(){
-                let username = localStorage.getItem('ms_username');
+                let username = localStorage.getItem('username');
                 return username ? username : this.name;
             }
         },
@@ -62,7 +66,7 @@
             // 用户名下拉菜单选择事件
             handleCommand(command) {
                 if(command == 'loginout'){
-                    localStorage.removeItem('ms_username')
+                    localStorage.removeItem('username')
                     this.$router.push('/login');
                 }
             },

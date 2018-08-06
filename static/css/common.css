@@ -4,7 +4,7 @@
     box-sizing: border-box;
     width: 100%;
     height: 70px;
-    font-size: 22px;
+    font-size: 16px;
     color: #fff;
     border-bottom: 1px solid #3064d7;
     -webkit-box-shadow: 0 5px 20px rgba(48,100,215,.6) inset;
@@ -61,11 +61,12 @@
 }
 .user-avator{
     margin-left: 20px;
+    cursor: pointer;
 }
 .user-avator img{
     display: block;
-    width:40px;
-    height:40px;
+    width: 35px;
+    height: 35px;
     border-radius: 50%;
 }
 .el-dropdown-link{
@@ -120,7 +121,6 @@
 /*Footer.vue的样式 end*/
 /*Sidebar.vue的样式 start*/
 .side-bar{
-    overflow: auto;
     width: 200px;
     max-width: 200px;
     min-width: 200px;
@@ -138,7 +138,12 @@
     line-height: 50px;
 }
 .side-bar li:active{
-    color:#e9eaec; 
+    color: #e9eaec;
+}
+.collection-item.active{
+    color: #fff;
+    background: #26a69a;
+    border-radius: 4px;
 }
 /*Sidebar.vue的样式 end*/
 /*Tags.vue的样式 start*/
@@ -256,9 +261,10 @@
 .vas-picture-list-item {
     display:flex; 
     flex-wrap:wrap;
-    background: url("../img/border.png") no-repeat 50%;
+    background: url("../img/border.png") no-repeat 100%;
     background-size: 100% 100%;
     cursor: pointer;
+    position: relative;
 }
 .vas-picture-list {
     position: relative;
@@ -269,6 +275,14 @@
     margin-top: 10px;
     background: url("../img/border.png") no-repeat 50%;
     background-size: 100% 100%;
+    text-align: center;
+}
+.vas-picture-list-nodata {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    margin: auto;
+    color: #ffffff;
     text-align: center;
 }
 .wrapper {
@@ -286,7 +300,7 @@
     background-size: 100% 100%;
     margin-right: 20px;
     position: relative;
-    height: auto;
+    min-height: 100px;
 }
 .vas-detal {
     margin-left: 40px;
@@ -302,4 +316,41 @@
     display: inline-block;
     margin-left: 40px;
     text-align: left;
+}
+.add-label {
+    color:#0ff;
+    margin-left:5px;
+    font-size:14px;
+    cursor:pointer;
+}
+.label-list-info {
+    display: inline-block;
+    color: #fff;
+    width: 80px;
+    font-size:14px;
+}
+
+/*定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸*/
+::-webkit-scrollbar
+{
+    width: 8px;
+    height: 8px;
+    background-color: #F5F5F5;
+    border-radius: 10px;
+}
+ 
+/*定义滚动条轨道 内阴影+圆角*/
+::-webkit-scrollbar-track
+{
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    border-radius: 10px;
+    background-color: #F5F5F5;
+}
+ 
+/*定义滑块 内阴影+圆角*/
+::-webkit-scrollbar-thumb
+{
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+    background-color: #3064d7;
 }

@@ -1,12 +1,11 @@
 <template>
-  <nav>
-    <ul class="pagination">
-      <li :class="{'disabled': current == 1}"><a href="javascript:;" @click="setCurrent(1)"> 首页 </a></li>
-      <li :class="{'disabled': current == 1}"><a href="javascript:;" @click="setCurrent(current - 1)"> 上一页 </a></li>
-      <li :class="{'disabled': current == page}"><a href="javascript:;" @click="setCurrent(current + 1)"> 下一页</a></li>
-      <li :class="{'disabled': current == page}"><a href="javascript:;" @click="setCurrent(page)"> 尾页 </a></li>
-    </ul>
-  </nav>
+    <div class="pagination">
+      <!--
+      <li :class="{'disabled': current == 1}"><a href="javascript:;" @click="setCurrent(1)"> 首页 </a></li> -->
+      <li :class="{'disabled': current == 1}"><span @click="setCurrent(current - 1)" class="row-left"></span></li>
+      <li :class="{'disabled': current == page}"><span @click="setCurrent(current + 1)" class="row-right"></span></li>
+      <!--<li :class="{'disabled': current == page}"><a href="javascript:;" @click="setCurrent(page)"> 尾页 </a></li> -->
+    </div>
 </template>
 
 <script>
@@ -96,39 +95,41 @@ export default {
 </script>
 
 <style>
-.pagination {
-  overflow: hidden;
-  display: table;
-  margin: 0 auto;
-  height: 50px;
-}
 .pagination li {
   list-style-type: none;
-  float: left;
-  height: 30px;
-  border-radius: 5px;
-  margin: 3px;
-  border: 1px solid #3064d7;
-  margin-top: 10px;
 }
-.pagination li :hover {
-  background: #3064d7;
+.row-right {
+  content: '';    
+  position: absolute;    
+  width: 30px;    
+  height: 30px;    
+  border: 4px solid #f5b24a;    
+  -webkit-transform: rotate(-135deg);    
+  -moz-transform: rotate(-135deg);    
+  -o-transform: rotate(-135deg);    
+  -ms-transform: rotate(-135deg);    
+  transform: rotate(-135deg);    
+  border-top: none;    
+  border-right: none;    
+  top: 65px; 
+  right: 20px;
+  display: inline-block;
 }
-a {
-  color: #ffffff;
-}
-.pagination li a {
-  display: block;
-  width: 50px;
-  height: 30px;
-  text-align: center;
-  line-height: 30px;
-  font-size: 12px;
-  border-radius: 5px;
-  text-decoration: none;
-}
-.pagination li a:active {
-  background: #67c23a;
-  color: aqua
+.row-left {
+  content: '';
+  left: 20px;
+  top: 65px;
+  position: absolute;    
+  width: 30px;    
+  height: 30px;    
+  border: 4px solid #f5b24a;    
+  -webkit-transform: rotate(45deg);    
+  -moz-transform: rotate(45deg);    
+  -o-transform: rotate(45deg);    
+  -ms-transform: rotate(45deg);    
+  transform: rotate(45deg);    
+  border-top: none;    
+  border-right: none;    
+  display: inline-block;
 }
 </style>

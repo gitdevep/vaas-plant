@@ -46,6 +46,12 @@
     text-align: center;
     margin-top: 20px;
 }
+.md-modal-content {
+    display: inline-block;
+    width: 90px;
+    text-align: right;
+    margin-right: 10px;
+}
 .cover {
 	position: fixed;
 	top: 0px;

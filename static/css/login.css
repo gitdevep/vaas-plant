@@ -112,7 +112,7 @@ input:-ms-input-placeholder { /* Internet Explorer 10+*/
     color: #222;
     margin-left: 10px;
 }
-.vas-login-form .el-code img {
+.vas-login-form .el-code-img {
     width: 100%;
     height: 100%;
     cursor: pointer;
@@ -175,3 +175,42 @@ input:-ms-input-placeholder { /* Internet Explorer 10+*/
     letter-spacing: 4px;
     font-size: 18px;
  }
+ .vas-login-header {
+    background: url("../img/login/login-header.png");
+    background-size: auto 100%;
+    width: 310px;
+}
+.regist-el-title {
+    width: 500px;
+    height: 80px;
+    line-height: 80px;
+    font-size: 24px;
+    color: #fefefe;
+    text-align: center;
+    margin-top: 40px;
+    margin: auto;
+}
+.regist-common {
+    display: inline-block; 
+    width: 200px;
+}
+.regist-common-bg {
+   position: absolute;
+   background: url("../img/login/regist-bg.png") no-repeat center bottom;
+   background-position: 205px 0px;
+   width: 700px;
+   height: 170px;
+   top: -10px;
+   left: -240px;
+   z-index: 10;
+}
+.regist-common-persion {
+    position: absolute;
+    background: url("../img/login/regist-bg.png") no-repeat center bottom;
+    background-position: 123px 0px;
+    width: 700px;
+    height: 170px;
+    top: -10px;
+    right: -164px;
+    z-index: 10;
+}
