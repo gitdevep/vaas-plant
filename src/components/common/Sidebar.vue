@@ -24,6 +24,10 @@ export default {
           icon: "el-icon-document",
           index: "fileupload",
           title: "文件上传"
+        },{
+          icon: "el-icon-document",
+          index: "weiqi",
+          title: "围棋"
         }],
       _items: [
         {

@@ -30,6 +30,11 @@ export default new Router({
                     meta: {title: '文件上传'}
                 },
                 {
+                    path:'/weiqi',
+                    component: resolve => require(['../components/page/weiqi/WeiQi.vue'], resolve),
+                    meta: {title: '围棋'}
+                },
+                {
                     path: '/table',
                     component: resolve => require(['../components/page/baseComponents/Table.vue'], resolve),
                     meta: { title: '基础表格' }
